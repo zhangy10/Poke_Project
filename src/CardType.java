@@ -1,5 +1,4 @@
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -10,40 +9,52 @@ import java.util.List;
  * 
  *         StudentID: 671205
  *
- * @ClassName: Classification
+ * @ClassName: CardType
  * 
  *             Oct 6, 2015
  * 
  * @Description: TODO
  */
-public enum Classification {
+public enum CardType implements Occurrence {
 	// From highest to lowest
 	/* */
-	STRAIGHT_FLUSH("%s-high straight flush"),
+	STRAIGHT_FLUSH(1, "%s-high straight flush"),
 	/* */
-	FOUR_OF_A_KIND("Four %ss"),
+	FOUR_OF_A_KIND(2, "Four %ss", 4),
 	/* */
-	FULL_HOUSE("%ss full of %ss"),
+	FULL_HOUSE(2, "%ss full of %ss"),
 	/* */
-	FLUSH("%s-high flush"),
+	FLUSH(5, "%s-high flush"),
 	/* */
-	STRAIGHT("%s-high straight"),
+	STRAIGHT(1, "%s-high straight"),
 	/* */
-	THREE_OF_A_KIND("Three %ss"),
+	THREE_OF_A_KIND(3, "Three %ss", 3),
 	/* */
-	TWO_PAIR("%ss over %ss"),
+	TWO_PAIR(3, "%ss over %ss", 2),
 	/* */
-	ONE_PAIR("Pair of %ss"),
+	ONE_PAIR(4, "Pair of %ss"),
 	/* */
-	HIGH_CARD("%s-high");
+	HIGH_CARD(5, "%s-high");
 
 	/**
 	 * 
 	 */
+	private int compareNum;
 	private String description;
+	private int occurrence;
 
-	Classification(String description) {
+	CardType(int compareTimes, String description) {
+		this(compareTimes, description, 0);
+	}
+
+	CardType(int compareTimes, String description, int occurrence) {
+		this.compareNum = compareTimes;
 		this.description = description;
+		this.occurrence = occurrence;
+	}
+
+	public int getCompareNum() {
+		return compareNum;
 	}
 
 	/**
@@ -53,6 +64,11 @@ public enum Classification {
 	@Override
 	public String toString() {
 		return description;
+	}
+	
+	@Override
+	public int getOccurrence() {
+		return occurrence;
 	}
 
 	/**
@@ -93,28 +109,28 @@ public enum Classification {
 	 * @return
 	 */
 	public static Description hasAKind(List<Card> cards) {
-		OccurSortedSet<Rank> occSet = new OccurSortedSet<>();
+		SortedOccSet<Rank> occSet = new SortedOccSet<>();
 		for (Card card : cards) {
 			occSet.add(card.getRank());
 		}
 
-		Rank rank = findByOccurence(occSet, 4);
+		Rank rank = occSet.findByOccurence(FOUR_OF_A_KIND);
 		if (rank != null) {
 			return new Description(FOUR_OF_A_KIND, rank);
 		}
 
-		rank = findByOccurence(occSet, 3);
+		rank = occSet.findByOccurence(THREE_OF_A_KIND);
 		if (rank != null) {
-			Rank rank2 = findByOccurence(rank, occSet, 2);
+			Rank rank2 = occSet.findByOccurence(TWO_PAIR);
 			if (rank2 != null) {
 				return new Description(FULL_HOUSE, rank, rank2);
 			}
 			return new Description(THREE_OF_A_KIND, rank);
 		}
 
-		rank = findByOccurence(occSet, 2);
+		rank = occSet.findByOccurence(TWO_PAIR);
 		if (rank != null) {
-			Rank rank2 = findByOccurence(rank, occSet, 2);
+			Rank rank2 = occSet.findByOccurence(rank, TWO_PAIR);
 			if (rank2 != null) {
 				if (rank2.compareRank(rank) > 0) {
 					return new Description(TWO_PAIR, rank2, rank);
@@ -125,24 +141,6 @@ public enum Classification {
 		}
 
 		occSet.clear();
-		return null;
-	}
-
-	private static Rank findByOccurence(OccurSortedSet<Rank> occSet,
-			int occurence) {
-		return findByOccurence(null, occSet, occurence);
-	}
-
-	private static Rank findByOccurence(Rank uncheckRank,
-			OccurSortedSet<Rank> occSet, int occurence) {
-		Iterator<Rank> iterator = occSet.iterator();
-		while (iterator.hasNext()) {
-			Rank another = iterator.next();
-			if (another != uncheckRank
-					&& occSet.getOccurrence(another) == occurence) {
-				return another;
-			}
-		}
 		return null;
 	}
 }

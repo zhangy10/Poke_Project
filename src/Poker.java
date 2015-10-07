@@ -37,8 +37,7 @@ public class Poker {
 		System.out.println(referee.toDescription());
 		
 		if (referee.getPlayerSize() > 1) {
-			Player[] winners = referee.refereeWinners();
-			System.out.println(toWinnerStr(winners));
+			System.out.println(referee.refereeWinners());
 		}
 	}
 
@@ -54,31 +53,5 @@ public class Poker {
 		Rank rankEnum = Constants.RANKS.get(rank);
 		Suit suitEnum = Constants.SUITS.get(suit);
 		return new Card(rankEnum, suitEnum);
-	}
-
-	public static String toWinnerStr(Player[] winners) {
-		if (winners == null) {
-			return null;
-		}
-		if (winners.length == 1) {
-			return String.format(Constants.WINS, winners[0].getNumber());
-		}
-		else {
-			StringBuilder sBuilder = new StringBuilder();
-			for (int i = 0; i < winners.length; i++) {
-				if (i == winners.length - 2) {
-					sBuilder.append(winners[i].getNumber());
-					sBuilder.append(" and ");
-				}
-				else if (i == winners.length - 1) {
-					sBuilder.append(winners[i].getNumber());
-				}
-				else {
-					sBuilder.append(winners[i].getNumber());
-					sBuilder.append(", ");
-				}
-			}
-			return String.format(Constants.DRAW, sBuilder.toString());
-		}
 	}
 }

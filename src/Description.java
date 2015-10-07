@@ -14,23 +14,23 @@
  * @Description: TODO
  */
 public final class Description {
-	private Classification classification;
+	private CardType cardType;
 	private Rank rank1;
 	private Rank rank2;
 
-	public Description(Classification classification, Rank rankest) {
-		this(classification, rankest, null);
+	public Description(CardType cardType, Rank rankest) {
+		this(cardType, rankest, null);
 	}
 
-	public Description(Classification classification, 
+	public Description(CardType cardType, 
 			Rank rank1, Rank rank2) {
-		this.classification = classification;
+		this.cardType = cardType;
 		this.rank1 = rank1;
 		this.rank2 = rank2;
 	}
 
-	public Classification getClassification() {
-		return classification;
+	public CardType getCardType() {
+		return cardType;
 	}
 
 	public Rank getRankest() {
@@ -43,7 +43,7 @@ public final class Description {
 
 	@Override
 	public String toString() {
-		return String.format(classification.toString(), rank1.getName(),
+		return String.format(cardType.toString(), rank1.getName(),
 				rank2 == null ? "" : rank2.getName());
 	}
 }

@@ -36,75 +36,41 @@ public final class Referee {
 		player.addCard(card);
 	}
 
-	public Player[] refereeWinners() {
-		OccurSortedSet<Player> occSet = new OccurSortedSet<>();
+	public String refereeWinners() {
+		SortedOccSet<Player> occSet = new SortedOccSet<>();
 		for (Player player : players) {
 			occSet.add(player);
 		}
 		List<Player> topPlayers = null;
 		Iterator<Player> iterator = occSet.iterator();
+		
 		while (iterator.hasNext()) {
 			topPlayers = occSet.getOccurList(iterator.next());
 			break;
 		}
 		occSet.clear();
 
-		if (topPlayers != null && topPlayers.size() == 1) {
-			return topPlayers.toArray(new Player[topPlayers.size()]);
-		}
-
-		Classification classification = topPlayers.get(0).getDescripition()
-				.getClassification();
-		List<Player> winners = findHighest(topPlayers);
-		switch (classification) {
-			// 1
-			case FOUR_OF_A_KIND:
-			case FULL_HOUSE:
-				winners = findWinByTimes(1, winners);
-				break;
-			// 2
-			case THREE_OF_A_KIND:
-			case TWO_PAIR:
-				winners = findWinByTimes(2, winners);
-				break;
-			// 3
-			case ONE_PAIR:
-				winners = findWinByTimes(3, winners);
-				break;
-			// 4
-			case FLUSH:
-			case HIGH_CARD:
-				winners = findWinByTimes(4, winners);
-				break;
-			default:
-				break;
-		}
-		return winners.toArray(new Player[winners.size()]);
+		return toWinnerStr(findHighestRank(topPlayers, topPlayers.get(0).getCompareNum()));
+	}
+	
+	private List<Player> findHighestRank(List<Player> players, int compareNum) {
+		return findHigher(players, compareNum, false);
 	}
 
-	private List<Player> findWinByTimes(int n, List<Player> winners) {
-		for (int i = 0; i < n; i++) {
-			winners = findHighest(winners, true);
-			if (winners.size() == 1)
-				return winners;
+	private List<Player> findHigher(List<Player> players, int compareNum, boolean isShift) {
+		if (players.size() == 1 || compareNum == 0) {
+			return players;
 		}
-		return winners;
-	}
-
-	private List<Player> findHighest(List<Player> sameRankPlayers) {
-		return findHighest(sameRankPlayers, false);
-	}
-
-	private List<Player> findHighest(List<Player> sameRankPlayers,
-			boolean matchNextRank) {
-		if (matchNextRank) {
+		
+		if (isShift) {
 			for (Player player : players) {
-				player.changeNextRank();
+				player.shiftRank();
 			}
 		}
-		Player winPlayer = sameRankPlayers.get(0);
+		
+		Player winPlayer = players.get(0);
 		List<Player> winners = new ArrayList<>();
-		for (Player player : sameRankPlayers) {
+		for (Player player : players) {
 			Rank rank1 = player.highestRank();
 			Rank rank2 = winPlayer.highestRank();
 			if (rank1.compareRank(rank2) > 0) {
@@ -116,9 +82,10 @@ public final class Referee {
 				winners.add(player);
 			}
 		}
-		return winners;
+		
+		return findHigher(winners, --compareNum, true);
 	}
-
+	
 	/**
 	 * 
 	 * @return
@@ -134,5 +101,31 @@ public final class Referee {
 			}
 		}
 		return sBuilder.toString();
+	}
+
+	private String toWinnerStr(List<Player> winners) {
+		if (winners == null) {
+			return null;
+		}
+		if (winners.size() == 1) {
+			return String.format(Constants.WINS, winners.get(0).getNumber());
+		}
+		else {
+			StringBuilder sBuilder = new StringBuilder();
+			for (int i = 0; i < winners.size(); i++) {
+				if (i == winners.size() - 2) {
+					sBuilder.append(winners.get(i).getNumber());
+					sBuilder.append(" and ");
+				}
+				else if (i == winners.size() - 1) {
+					sBuilder.append(winners.get(i).getNumber());
+				}
+				else {
+					sBuilder.append(winners.get(i).getNumber());
+					sBuilder.append(", ");
+				}
+			}
+			return String.format(Constants.DRAW, sBuilder.toString());
+		}
 	}
 }

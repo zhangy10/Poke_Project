@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  * 
  * @Description: TODO
  */
-public class Player implements Comparable<Player> {
+public final class Player implements Comparable<Player> {
 	private int number;
 	private List<Card> cards;
 	private Description descripition;
@@ -32,15 +33,14 @@ public class Player implements Comparable<Player> {
 		return highestRank;
 	}
 
-	public void changeNextRank() {
-		Classification classification = descripition.getClassification();
-		switch (classification) {
+	public void shiftRank() {
+		removeCard(highestRank);
+		CardType cardType = descripition.getCardType();
+		switch (cardType) {
 			case FULL_HOUSE:
-				highestRank = descripition.getRank2();
-				return;
 			case TWO_PAIR:
 				Rank rank2 = descripition.getRank2();
-				if (!highestRank.equals(rank2)) {
+				if (highestRank.compareTo(rank2) != 0) {
 					highestRank = rank2;
 					return;
 				}
@@ -48,46 +48,8 @@ public class Player implements Comparable<Player> {
 				break;
 		}
 
-		for (Card card : cards) {
-			Rank nextHigh = card.getRank();
-			Rank rank1 = descripition.getRankest();
-			Rank rank2 = descripition.getRank2();
-			switch (classification) {
-				case FOUR_OF_A_KIND:
-					if (!nextHigh.equals(highestRank)) {
-						highestRank = nextHigh;
-						return;
-					}
-					break;
-				case THREE_OF_A_KIND:
-				case ONE_PAIR:
-					if (highestRank.equals(rank1)) {
-						if (!nextHigh.equals(highestRank)) {
-							highestRank = nextHigh;
-							return;
-						}
-					}
-					else if (nextHigh.compareRank(highestRank) < 0) {
-						highestRank = nextHigh;
-						return;
-					}
-					break;
-				case TWO_PAIR:
-					if (!nextHigh.equals(rank1) && !nextHigh.equals(rank2)) {
-						highestRank = nextHigh;
-						return;
-					}
-					break;
-				case FLUSH:
-				case HIGH_CARD:
-					if (nextHigh.compareRank(highestRank) < 0) {
-						highestRank = nextHigh;
-						return;
-					}
-					break;
-				default:
-					break;
-			}
+		if (cards.size() >= 1) {
+			highestRank = cards.get(0).getRank();
 		}
 	}
 
@@ -112,53 +74,60 @@ public class Player implements Comparable<Player> {
 		}
 	}
 
-	private void identifyType() {
-		if (descripition != null) {
-			return;
+	private void removeCard(Rank rank) {
+		Iterator<Card> iterator = cards.iterator();
+		while (iterator.hasNext()) {
+			if (rank.compareTo(iterator.next().getRank()) == 0) {
+				iterator.remove();
+			}
 		}
+	}
+
+	private void identifyType() {
 
 		Collections.sort(cards);
 		highestRank = cards.get(0).getRank();
 
-		if (Classification.isFlush(cards)) {
-			descripition = new Description(Classification.FLUSH, highestRank);
+		if (CardType.isFlush(cards)) {
+			descripition = new Description(CardType.FLUSH, highestRank);
 		}
 
-		if (Classification.isStraight(cards)) {
-			if (descripition != null && descripition
-					.getClassification() == Classification.FLUSH) {
-				descripition = new Description(Classification.STRAIGHT_FLUSH,
+		if (CardType.isStraight(cards)) {
+			if (descripition != null) {
+				descripition = new Description(CardType.STRAIGHT_FLUSH,
 						highestRank);
 			}
 			else {
-				descripition = new Description(Classification.STRAIGHT,
-						highestRank);
+				descripition = new Description(CardType.STRAIGHT, highestRank);
 			}
 		}
 
 		if (descripition == null) {
-			descripition = Classification.hasAKind(cards);
+			descripition = CardType.hasAKind(cards);
 			if (descripition != null) {
 				highestRank = descripition.getRankest();
 			}
 		}
 
 		if (descripition == null) {
-			descripition = new Description(Classification.HIGH_CARD,
-					highestRank);
+			descripition = new Description(CardType.HIGH_CARD, highestRank);
 		}
+	}
+
+	public int getCompareNum() {
+		return descripition.getCardType().getCompareNum();
 	}
 
 	@Override
 	public int compareTo(Player another) {
-		return descripition.getClassification()
-				.compareTo(another.getDescripition().getClassification());
+		return descripition.getCardType()
+				.compareTo(another.getDescripition().getCardType());
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		Player another = (Player) o;
-		return descripition.getClassification() == another.getDescripition()
-				.getClassification();
+		return descripition.getCardType() == another.getDescripition()
+				.getCardType();
 	}
 }

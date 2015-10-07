@@ -17,14 +17,14 @@ import java.util.TreeMap;
  * 
  * 
  * @param <E>
- *            Oct 6, 2015
+ *            The element type of this Set. Oct 6, 2015
  * 
  * @Description: equal(), compareTo()
  */
-public final class OccurSortedSet<E> {
+public final class SortedOccSet<E> {
 	private Map<E, ArrayList<E>> map;
 
-	public OccurSortedSet() {
+	public SortedOccSet() {
 		map = new TreeMap<>();
 	}
 
@@ -35,7 +35,7 @@ public final class OccurSortedSet<E> {
 	public void clear() {
 		map.clear();
 	}
-
+	
 	public List<E> getOccurList(E key) {
 		return copyOccurList(key);
 	}
@@ -59,8 +59,24 @@ public final class OccurSortedSet<E> {
 		return map.size();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")  // this method may throw ClassCastExceptions!
 	private List<E> copyOccurList(E key) {
 		return (List<E>) (map.get(key)).clone();
+	}
+
+	public E findByOccurence(Occurrence key) {
+		return findByOccurence(null, key);
+	}
+
+	public E findByOccurence(E unCheckedKey, Occurrence key) {
+		Iterator<E> iterator = map.keySet().iterator();
+		while (iterator.hasNext()) {
+			E another = iterator.next();
+			if (!another.equals(unCheckedKey)
+					&& getOccurrence(another) == key.getOccurrence()) {
+				return another;
+			}
+		}
+		return null;
 	}
 }
