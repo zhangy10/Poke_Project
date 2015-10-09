@@ -9,11 +9,11 @@ import java.util.List;
  *         LoginID: zhangy10
  * 
  *
- * @ClassName: Referee
+ * @ClassName Referee
  * 
- *             Oct 4, 2015
+ *            Oct 4, 2015
  * 
- * @Description: TODO
+ * @Description TODO
  * 
  * @see Player, SortedOccSet
  */

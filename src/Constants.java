@@ -8,21 +8,20 @@ import java.util.Map;
  *         LoginID: zhangy10
  * 
  *
- * @ClassName: Constants
+ * @ClassName Constants
  * 
- *             Oct 4, 2015
+ *            Oct 4, 2015
  * 
- * @Description: This Constants class is used for declaring some constant
- *               things, including string, integer and static block, to provide
- *               a quickly convenient way for accessing these constant resources
- *               in this Project.
- *               <p>
- *               Note: According to the name principles of Java, using upper
- *               letters names the final constant variables with the underlines
- *               to separate different words.
+ * @Description This Constants class is used for declaring some constant things,
+ *              including string, integer and static block, to provide a quickly
+ *              convenient way for accessing these constant resources in this
+ *              Project.
+ *              <p>
+ *              Note: According to the name principles of Java, using upper
+ *              letters names the final constant variables with the underlines
+ *              to separate different words.
  */
 public class Constants {
-
     /**
      * Declaring the maximum number of a hand of cards for each player.
      */
@@ -61,8 +60,10 @@ public class Constants {
      * Using static block to initialize the rang of both types
      */
     static {
-        // the key of the map represents the upper character of inputs.
-        // the value of the map represents the different enum types.
+        /*
+         * The key of the map represents the upper character of inputs. The
+         * value of the map represents the different enum types.
+         */
         SUITS.put("C", Suit.C);
         SUITS.put("H", Suit.H);
         SUITS.put("S", Suit.S);

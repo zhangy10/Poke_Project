@@ -5,13 +5,13 @@
  *         LoginID: zhangy10
  * 
  *
- * @ClassName: Suit
+ * @ClassName Suit
  * 
- *             Oct 4, 2015
+ *            Oct 4, 2015
  * 
- * @Description: This Enum type represent the suit of each card in Poker game.
- *               It contains 4 different types which indicate the different
- *               patterns.
+ * @Description This Enum type represent the suit of each card in Poker game. It
+ *              contains 4 different types which indicate the different
+ *              patterns.
  */
 public enum Suit {
     C("Clubs"), D("Diamonds"), H("Hearts"), S("Spades");

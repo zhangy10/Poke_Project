@@ -5,43 +5,41 @@
  *         LoginID: zhangy10
  * 
  *
- * @ClassName: Poker
+ * @ClassName Poker
  * 
- *             Oct 4, 2015
+ *            Oct 4, 2015
  * 
- * @Description: This project will provide an efficient solution to deal with
- *               the questions of Poker game. According to the specification,
- *               this game offers players a number of rules for selecting the
- *               final winner. It contains 13 kinds of ranks from 2 to Ace as an
- *               ascending order, 4 kinds of suits and 9 kinds of
- *               classifications from StriaghtFlush to HighCard as a descending
- *               order. Also, the maximum card number of each player is 5. The
- *               decision for selecting winners will depend on the card
- *               classifications as well as the value of each card rank.
- *               <p>
- *               The challenges of this project will involve the below points:
- *               <p>
- *               1) Identifying the description of each hand of cards.
- *               <p>
- *               2) Selecting winners by using given conditions in
- *               specification.
- *               <p>
- *               This Poker class is the launch class of this project. Its
- *               features involve the below points:
- *               <p>
- *               1) Validating the given input data.
- *               <p>
- *               2) Outputting each player's description of cards. For this
- *               point, the Referee class is abstracted. It is involved to
- *               return the relevant description of each player and to select
- *               winners. More detail can be found in this class.
- *               <p>
- *               3) Printing a winner list.
+ * @Description This project will provide an efficient solution to deal with the
+ *              questions of Poker game. According to the specification, this
+ *              game offers players a number of rules for selecting the final
+ *              winner. It contains 13 kinds of ranks from 2 to Ace as an
+ *              ascending order, 4 kinds of suits and 9 kinds of classifications
+ *              from StriaghtFlush to HighCard as a descending order. Also, the
+ *              maximum card number of each player is 5. The decision for
+ *              selecting winners will depend on the card classifications as
+ *              well as the value of each card rank.
+ *              <p>
+ *              The challenges of this project will involve the below points:
+ *              <p>
+ *              1) Identifying the description of each hand of cards.
+ *              <p>
+ *              2) Selecting winners by using given conditions in specification.
+ *              <p>
+ *              This Poker class is the launch class of this project. Its
+ *              features involve the below points:
+ *              <p>
+ *              1) Validating the given input data.
+ *              <p>
+ *              2) Outputting each player's description of cards. For this
+ *              point, the Referee class is abstracted. It is involved to return
+ *              the relevant description of each player and to select winners.
+ *              More detail can be found in this class.
+ *              <p>
+ *              3) Printing a winner list.
  * 
  * @see Referee
  */
 public class Poker {
-
     /**
      * Presenting the main work-flow of this project from validating data to
      * printing the expected output.
@@ -50,8 +48,10 @@ public class Poker {
      *            the given input data for command line arguments.
      */
     public static void main(String[] inputs) {
-        // If the length of inputs is not the multiple of 5 or is not given,
-        // then print invalid message.
+        /*
+         * If the length of inputs is not the multiple of 5 or is not given,
+         * then print invalid message.
+         */
         if (inputs == null || inputs.length == 0
                 || inputs.length % Constants.MAX_CARDS_NUMBER != 0) {
             System.out.println(Constants.INVALID_INPUT_NUMBER);

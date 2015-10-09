@@ -5,18 +5,17 @@
  *         LoginID: zhangy10
  * 
  *
- * @ClassName: Occurrence
+ * @ClassName Occurrence
  * 
- *             Oct 4, 2015
+ *            Oct 4, 2015
  * 
- * @Description: This interface is combined with the customized collection,
- *               SortedOccSet, to offer a way that calculates the occurrence of
- *               the same objects in a given list.
- *               <p>
- *               By using the idea of hash to design this kind of data structure
- *               is to offer a better performance with linear time-consuming
- *               than iterating a list to find the occurrence of the same
- *               objects.
+ * @Description This interface is combined with the customized collection,
+ *              SortedOccSet, to offer a way that calculates the occurrence of
+ *              the same objects in a given list.
+ *              <p>
+ *              By using the idea of hash to design this kind of data structure
+ *              is to offer a better performance with linear time-consuming than
+ *              iterating a list to find the occurrence of the same objects.
  * 
  * @see SortedOccSet
  */

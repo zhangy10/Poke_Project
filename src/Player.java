@@ -10,20 +10,20 @@ import java.util.List;
  *         LoginID: zhangy10
  * 
  *
- * @ClassName: Player
+ * @ClassName Player
  * 
- *             Oct 4, 2015
+ *            Oct 4, 2015
  * 
- * @Description: This Player class is abstracted to represent each real player
- *               in Poker game. It holds a number of variables, and will be
- *               refereed by a Referee to identify which players are winners.
- *               <p>
- *               Note: Considering the algorithm of selecting winners will put
- *               each Player into a SortedOccSet to group by each card type and
- *               to get a highest card type player list, the Comparable
- *               interface is required to be implemented related to the
- *               description of SortedOccSet. Also, the equal() method need to
- *               be overridden. This class is immutable.
+ * @Description This Player class is abstracted to represent each real player in
+ *              Poker game. It holds a number of variables, and will be refereed
+ *              by a Referee to identify which players are winners.
+ *              <p>
+ *              Note: Considering the algorithm of selecting winners will put
+ *              each Player into a SortedOccSet to group by each card type and
+ *              to get a highest card type player list, the Comparable interface
+ *              is required to be implemented related to the description of
+ *              SortedOccSet. Also, the equal() method need to be overridden.
+ *              This class is immutable.
  * 
  * @see Card, Description, CardType, SortedOccSet
  */
@@ -62,20 +62,39 @@ public final class Player implements Comparable<Player> {
     }
 
     /**
-     * 
+     * Shifting the highest rank since more than one players hold the same card
+     * type that needs to shift to the next highest rank.
+     * <p>
+     * This return value will be used to check the final winners recursively if
+     * the draw occurs.
      * 
      * @return int: the rest size of cards.
      */
     public int shiftRank() {
-        //
+        /*
+         * Since the draw occurred, the current highest rank could not decide
+         * the winners any more. Therefore, the highest rank should be shifted
+         * to the next highest rank.
+         * 
+         * Removing the current highest rank from the list of cards.
+         */
         removeCard(highestRank);
         CardType cardType = description.getCardType();
-        //
+        /*
+         * Especially, for these two types, the second high rank is the rank of
+         * another pair. Therefore, this case is specialized for dealing
+         * FullHouse and TwoPair.
+         */
         switch (cardType) {
             case FULL_HOUSE:
             case TWO_PAIR:
                 Rank rank2 = description.getRank2();
-                //
+                /*
+                 * For TwoPair, if the draw still occurs, the last card need to
+                 * be compared. In this case, if the current highest rank has
+                 * been the rank of another pair, this statement will be skipped
+                 * to the next statement to assign the last rank.
+                 */
                 if (highestRank.compareTo(rank2) != 0) {
                     highestRank = rank2;
                     return cards.size();
@@ -84,7 +103,10 @@ public final class Player implements Comparable<Player> {
                 break;
         }
 
-        //
+        /*
+         * The first place has been the highest rank since previous rank was
+         * removed.
+         */
         if (cards.size() >= 1) {
             highestRank = cards.get(0).getRank();
         }
@@ -136,8 +158,10 @@ public final class Player implements Comparable<Player> {
      */
     public void addCard(Card card) {
         cards.add(new Card(card));
-        // If the size of cards is up to the given maximum number, then
-        // identifying the card type of this player.
+        /*
+         * If the size of cards is up to the given maximum number, then
+         * identifying the card type of this player.
+         */
         if (cards.size() == Constants.MAX_CARDS_NUMBER) {
             identifyType();
         }
@@ -168,21 +192,31 @@ public final class Player implements Comparable<Player> {
     }
 
     /**
-     * 
-     * 
+     * Identifying card type since the cards have been distributed to each
+     * player.
      */
     private void identifyType() {
-        //
+        /*
+         * Collections.sort() method is specialized for List interface to sort
+         * data. In fact, the inside implement of this method also use
+         * Arrays.sort() to work. Therefore, the Card object need to implement
+         * the Comparable interface.
+         */
         Collections.sort(cards);
-        //
+        /*
+         * Pick the first one as the highest rank. As mentioned in Rank Enum,
+         * the default order of ranks is descending.
+         */
         highestRank = cards.get(0).getRank();
-        //
+
         if (CardType.isFlush(cards)) {
             description = new Description(CardType.FLUSH, highestRank);
         }
-        //
         if (CardType.isStraight(cards)) {
-            //
+            /*
+             * If description is not null, which means it is a Flush. Also, it
+             * is a Straight. Therefore it is a StraightFlush.
+             */
             if (description != null) {
                 description = new Description(CardType.STRAIGHT_FLUSH,
                         highestRank);
@@ -191,21 +225,23 @@ public final class Player implements Comparable<Player> {
                 description = new Description(CardType.STRAIGHT, highestRank);
             }
         }
-        //
+        // If description is still null, then to check whether it is AKind type
         if (description == null) {
             description = CardType.hasAKind(cards);
             if (description != null) {
                 highestRank = description.getRankest();
             }
         }
-        //
+        // Finally, if the description does not match any types, it will be a
+        // HighCard.
         if (description == null) {
             description = new Description(CardType.HIGH_CARD, highestRank);
         }
     }
 
     /**
-     * 
+     * Recalling the compareTo() of CardType to decide which player is greater
+     * than another.
      */
     @Override
     public int compareTo(Player another) {
@@ -214,7 +250,7 @@ public final class Player implements Comparable<Player> {
     }
 
     /**
-     * 
+     * Also this method depends on whether the card types are equal.
      */
     @Override
     public boolean equals(Object o) {
