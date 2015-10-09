@@ -150,7 +150,15 @@ public final class Player implements Comparable<Player> {
      *            the rank of which card need to be removed.
      */
     private void removeCard(Rank rank) {
-        // Pay more attention to remove action of collections, because
+        /*
+         * Pay more attention to remove action of collections, because such
+         * unsafe operation for collections in Java will usually give rise to
+         * the ConcurrentModificationException or IndexOutOfBoundsException.
+         * 
+         * In general, using Iterator loop to traverse a collection is a proper
+         * way to do so. Another well-known way is by using normal for loop to
+         * traverse reversely to delete elements.
+         */
         Iterator<Card> iterator = cards.iterator();
         while (iterator.hasNext()) {
             if (rank.compareTo(iterator.next().getRank()) == 0) {

@@ -31,72 +31,72 @@
  */
 public enum Rank {
 
-	/**
-	 * Redesign as a descending order for logical part which can easily access
-	 * the max value from a data structure instead of iterating to the end of
-	 * it.
-	 */
-	A(14), K(13), Q(12), J(11), T(10), NINE(9), EIGHT(8), 
-	SEVEN(7), SIX(6), FIVE(5), FOUR(4), THREE(3), TWO(2);
+    /**
+     * Redesign as a descending order for logical part which can easily access
+     * the max value from a data structure instead of iterating to the end of
+     * it.
+     */
+    A(14), K(13), Q(12), J(11), T(10), NINE(9), EIGHT(8), 
+    SEVEN(7), SIX(6), FIVE(5), FOUR(4), THREE(3), TWO(2);
 
-	/**
-	 * The real value of Rank in Poker game, which is from 2 to Ace.
-	 */
-	private int value;
+    /**
+     * The real value of Rank in Poker game, which is from 2 to Ace.
+     */
+    private int value;
 
-	/**
-	 * This constructor is used for storing a real value of ecah type.
-	 * <p>
-	 * Note: public is not permitted for Enum type.
-	 * 
-	 * @param value:
-	 *            the real value of Rank.
-	 */
-	Rank(int value) {
-		this.value = value;
-	}
+    /**
+     * This constructor is used for storing a real value of ecah type.
+     * <p>
+     * Note: public is not permitted for Enum type.
+     * 
+     * @param value:
+     *            the real value of Rank.
+     */
+    Rank(int value) {
+        this.value = value;
+    }
 
-	/**
-	 * Accessor method for accessing the real value of each type
-	 * 
-	 * @return int: The real value of each rank
-	 */
-	public int getValue() {
-		return value;
-	}
+    /**
+     * Accessor method for accessing the real value of each type
+     * 
+     * @return int: The real value of each rank
+     */
+    public int getValue() {
+        return value;
+    }
 
-	/**
-	 * Return the relevant card full name of each rank
-	 * 
-	 * @return String: full name of rank
-	 */
-	public String getName() {
-		switch (value) {
-			case 14:
-				return "Ace";
-			case 13:
-				return "King";
-			case 12:
-				return "Queen";
-			case 11:
-				return "Jack";
-			default:
-				return String.valueOf(value);
-		}
-	}
+    /**
+     * Return the relevant card full name of each rank
+     * 
+     * @return String: full name of rank
+     */
+    public String getName() {
+        switch (value) {
+            case 14:
+                return "Ace";
+            case 13:
+                return "King";
+            case 12:
+                return "Queen";
+            case 11:
+                return "Jack";
+            default:
+                return String.valueOf(value);
+        }
+    }
 
-	/**
-	 * The reason for designing this method is because that the original
-	 * ascending order is assumed as a descending order. So this method will
-	 * return correctly by using the value variable to compare.
-	 * 
-	 * @param another:
-	 *            another object which needs to compare with the current object.
-	 * 
-	 * @return negative: this less than another; positive: this greater than
-	 *         another; 0: equal.
-	 */
-	public int compareRank(Rank another) {
-		return value - another.getValue();
-	}
+    /**
+     * The reason for designing this method is because that the original
+     * ascending order is assumed as a descending order. So this method will
+     * return correctly by using the value variable to compare.
+     * 
+     * @param another:
+     *            another object which needs to compare with the current object.
+     * 
+     * @return negative: this less than another; positive: this greater than
+     *         another; 0: equal.
+     */
+    public int compareRank(Rank another) {
+        return value - another.getValue();
+    }
 }

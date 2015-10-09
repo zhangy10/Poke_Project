@@ -14,31 +14,31 @@
  *               patterns.
  */
 public enum Suit {
-	C("Clubs"), D("Diamonds"), H("Hearts"), S("Spades");
+    C("Clubs"), D("Diamonds"), H("Hearts"), S("Spades");
 
-	/**
-	 * The full name of each pattern.
-	 */
-	private String value;
+    /**
+     * The full name of each pattern.
+     */
+    private String value;
 
-	/**
-	 * The constructor method requires a full name for each type.
-	 * <p>
-	 * Note: public is not permitted for Enum type.
-	 * 
-	 * @param value:
-	 *            the full name of suit.
-	 */
-	Suit(String value) {
-		this.value = value;
-	}
+    /**
+     * The constructor method requires a full name for each type.
+     * <p>
+     * Note: public is not permitted for Enum type.
+     * 
+     * @param value:
+     *            the full name of suit.
+     */
+    Suit(String value) {
+        this.value = value;
+    }
 
-	/**
-	 * Return the full name of each pattern.
-	 * 
-	 * @return String: full name of each pattern.
-	 */
-	public String getValue() {
-		return value;
-	}
+    /**
+     * Return the full name of each pattern.
+     * 
+     * @return String: full name of each pattern.
+     */
+    public String getValue() {
+        return value;
+    }
 }
