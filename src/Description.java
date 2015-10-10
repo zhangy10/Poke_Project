@@ -9,7 +9,7 @@
  * 
  *            Oct 4, 2015
  * 
- * @Description This Description class represent an abstract data structure of
+ * @Description This Description class represents an abstract data structure of
  *              each classification's description from specification. It
  *              contains three instance variables which are also related to the
  *              expected output of each type description.

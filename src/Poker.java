@@ -12,7 +12,7 @@
  * @Description This project will provide an efficient solution to deal with the
  *              questions of Poker game. According to the specification, this
  *              game offers players a number of rules for selecting the final
- *              winner. It contains 13 kinds of ranks from 2 to Ace as an
+ *              winners. It contains 13 kinds of ranks from 2 to Ace as an
  *              ascending order, 4 kinds of suits and 9 kinds of classifications
  *              from StriaghtFlush to HighCard as a descending order. Also, the
  *              maximum card number of each player is 5. The decision for
@@ -73,7 +73,7 @@ public class Poker {
             // To the number of each player.
             int numOfPlayers = i / Constants.MAX_CARDS_NUMBER;
             // Add a valid card object into Referee.
-            referee.addPlayer(card, numOfPlayers);
+            referee.dealCard(card, numOfPlayers);
         }
         // Print the description of player.
         System.out.println(referee.toDescription());
@@ -82,15 +82,15 @@ public class Poker {
          * winners list as a formatted string.
          */
         if (referee.getPlayerSize() > 1) {
-            System.out.println(referee.refereeWinners());
+            System.out.println(referee.determineWinners());
         }
     }
 
     /**
      * Validating each card name. For each card, two characters will be
      * contained. The first one is the rank of card which is in the range of
-     * Ranks map. The second one is the suit of card that the valid range of it
-     * is defined in Suits map.
+     * Ranks map. The second one is the suit of card that the valid range is
+     * defined in Suits map.
      * 
      * @see Constants
      * 

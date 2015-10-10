@@ -24,14 +24,14 @@ import java.util.TreeMap;
  *              <p>
  *              For example, the challenge of identifying which description
  *              belongs to which card type (n of A Kind) is to find the number
- *              of the same rank or suit in each hand of cards. In this case,
- *              the way of using hash idea to find the occurrence of the same
- *              things is the best solution which can offer a linear
- *              time-consuming complexity to build the relationship between the
- *              number of occurrence and different things.
+ *              of the same rank in each hand of cards. In this case, the way of
+ *              using hash idea to find the occurrence of the same things is the
+ *              best solution offering a linear time-consuming complexity to
+ *              build the relationship between the number of occurrence and
+ *              different things.
  *              <p>
  *              For other cases, implementing or abstracting a single class to
- *              offer the above hash idea is a good way to avoid code
+ *              offer the above hash idea is a proper way to avoid code
  *              repetitions and to make the logical parts clearer. Therefore,
  *              this SortedOccSet class is designed for offering the below
  *              features:
@@ -82,7 +82,7 @@ public final class SortedOccSet<E> {
     }
 
     /**
-     * Returning the number of occurrence of the given key. Regarding with the
+     * Return the number of occurrence of the given key. Regarding with the
      * add() method, the number of occurrence will be the size of a list of same
      * type objects.
      * 
@@ -95,9 +95,9 @@ public final class SortedOccSet<E> {
     }
 
     /**
-     * Returning a list of object references which are the same type as the
-     * given key. The returned list will be copy by using clone() (default way
-     * for copying an array in Java), because this class is immutable.
+     * Return a list of object references which are the same type. The returned
+     * list will be copy by using clone() (default way for copying an array in
+     * Java), because this class is immutable.
      * 
      * @param key:
      *            the given key to find a reference list which contains a number
@@ -133,9 +133,9 @@ public final class SortedOccSet<E> {
     }
 
     /**
-     * Returning an iterator object can allow the collection with the enhanced
-     * for loop. Also, Iterator interface supported by Java is an easier and
-     * safer way to offer users access data in collections than for loop.
+     * Return an iterator object that can allow the collection with the enhanced
+     * for-loop. Also, Iterator interface supported by Java is an easier and
+     * safer way to offer users access data in collections than for-loop.
      * 
      * @return Iterator<E>: the iterator of the Set.
      */
@@ -156,9 +156,9 @@ public final class SortedOccSet<E> {
     @SuppressWarnings("unchecked")
     private List<E> copyOccurList(E key) {
         /*
-         * The above annotation indicates that the named compiler warnings should be
-         * suppressed in the annotated element. Otherwise, compiler will give an
-         * warning error.
+         * The above annotation indicates that the named compiler warnings
+         * should be suppressed in the annotated element. Otherwise, compiler
+         * will give an warning error.
          */
         return (List<E>) (map.get(key)).clone();
     }
@@ -180,7 +180,8 @@ public final class SortedOccSet<E> {
      * Overloading the findByOccurence() method, to extend the find feature for
      * avoiding duplicated result.
      * <p>
-     * This is specialized for finding another pair in this Project.
+     * This is specialized for finding another pair of a card type in this
+     * Project.
      *
      * @param unCheckedKey:
      *            unchecked result which has been found.

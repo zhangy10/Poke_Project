@@ -15,8 +15,8 @@ import java.util.List;
  *            Oct 4, 2015
  * 
  * @Description This Player class is abstracted to represent each real player in
- *              Poker game. It holds a number of variables, and will be refereed
- *              by a Referee to identify which players are winners.
+ *              Poker game. It holds a number of variables, and will be
+ *              determined by a Referee to identify which players are winners.
  *              <p>
  *              Note: Considering the algorithm of selecting winners will put
  *              each Player into a SortedOccSet to group by each card type and
@@ -114,7 +114,7 @@ public final class Player implements Comparable<Player> {
     }
 
     /**
-     * Returning each player's number.
+     * Return each player's number.
      * 
      * @return int: the number of each player. Attention off-by-one error.
      */
@@ -133,7 +133,7 @@ public final class Player implements Comparable<Player> {
     }
 
     /**
-     * Returning the highest rank.
+     * Return the highest rank.
      * 
      * @return Rank: the highest rank.
      */
@@ -180,7 +180,7 @@ public final class Player implements Comparable<Player> {
          * the ConcurrentModificationException or IndexOutOfBoundsException.
          * 
          * In general, using Iterator loop to traverse a collection is a proper
-         * way to do so. Another well-known way is by using normal for loop to
+         * way to do so. Another well-known way is by using normal for-loop to
          * traverse reversely to delete elements.
          */
         Iterator<Card> iterator = cards.iterator();
