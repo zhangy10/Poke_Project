@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -100,16 +99,7 @@ public final class Referee {
         for (Player player : players) {
             occSet.add(player);
         }
-        List<Player> topPlayers = null;
-        Iterator<Player> iterator = occSet.iterator();
-        /*
-         * Selecting the first one as the players who hold the same highest card
-         * type.
-         */
-        while (iterator.hasNext()) {
-            topPlayers = occSet.getOccurList(iterator.next());
-            break;
-        }
+        List<Player> topPlayers = occSet.findPeak();
         occSet.clear();
         // Calling the findHigherRank() method to deal with the winners.
         return toWinnerStr(findHigherRank(topPlayers));

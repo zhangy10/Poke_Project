@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 /**
@@ -106,7 +107,7 @@ public final class SortedOccSet<E> {
      * @return List<E>: a list of same type objects.
      */
     public List<E> getOccurList(E key) {
-        return copyOccurList(key);
+        return copyOccurList(map.get(key));
     }
 
     /**
@@ -136,6 +137,29 @@ public final class SortedOccSet<E> {
      * Return an iterator object that can allow the collection with the enhanced
      * for-loop. Also, Iterator interface supported by Java is an easier and
      * safer way to offer users access data in collections than for-loop.
+     * <p>
+     * Note: For Map interface, there are 3 ways supported by Java to access the
+     * data of Map, map.keySet(), map.values() and map.entrySet(). For each of
+     * them, an iterator object can be returned for traversing Map. The question
+     * is how to use them into different situations. Actually, it depends on the
+     * below 3 situations:
+     * <p>
+     * 1) Only for traversing the key. In this case, calling
+     * map.keySet().iterator() is recommended. In fact, you can firstly use this
+     * method to traverse key set, and using the specific key to get() the
+     * value. However, the performance of this is more inefficient than using
+     * the third way, map.entrySet().iterator().
+     * <p>
+     * 2) Only for traversing the value. The map.values().iterator() does work
+     * for it.
+     * <p>
+     * 3) Involving both of key and value. In this case, the efficient way is to
+     * return the map.entrySet().iterator(), because it avoids to call the get()
+     * method again.
+     * <p>
+     * Here, the map.keySet().iterator() is used. The reason for this is to keep
+     * this class as immutable, because if it returns the entrySet, the
+     * references of values will be exposed to the outside.
      * 
      * @return Iterator<E>: the iterator of the Set.
      */
@@ -154,13 +178,13 @@ public final class SortedOccSet<E> {
      *             casting from Object to List.
      */
     @SuppressWarnings("unchecked")
-    private List<E> copyOccurList(E key) {
+    private List<E> copyOccurList(ArrayList<E> value) {
         /*
          * The above annotation indicates that the named compiler warnings
          * should be suppressed in the annotated element. Otherwise, compiler
          * will give an warning error.
          */
-        return (List<E>) (map.get(key)).clone();
+        return (List<E>) value.clone();
     }
 
     /**
@@ -190,20 +214,43 @@ public final class SortedOccSet<E> {
      * @return E: an object which has the same occurrence as the given key
      */
     public E findByOccurence(E unCheckedKey, Occurrence key) {
-        Iterator<E> iterator = map.keySet().iterator();
+        /*
+         * The reason for using map.entrySet().iterator() has given in the above
+         * iterator() method's annotation. Please check it out.
+         */
+        Iterator<Entry<E, ArrayList<E>>> iterator = map.entrySet().iterator();
         while (iterator.hasNext()) {
-            E another = iterator.next();
+            Entry<E, ArrayList<E>> entry = iterator.next();
+            E another = entry.getKey();
+            int occurence = entry.getValue().size();
             /*
              * if another is not equal with the unchecked one, and the
              * occurrence of another is equal with the given number of
              * occurrence, return this object.
              */
             if (!another.equals(unCheckedKey)
-                    && getOccurrence(another) == key.getOccurrence()) {
+                    && occurence == key.getOccurrence()) {
                 return another;
             }
         }
         return null;
+    }
+
+    /**
+     * Return a value which is in the first place of the Set.
+     * <p>
+     * This is specialized for selecting the first one as the players who hold
+     * the same highest card type.
+     * 
+     * @return List<E>: the top objects.
+     */
+    public List<E> findPeak() {
+        List<E> topList = null;
+        for (ArrayList<E> value : map.values()) {
+            topList = copyOccurList(value);
+            break;
+        }
+        return topList;
     }
 
     /**
