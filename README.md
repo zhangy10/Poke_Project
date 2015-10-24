@@ -14,5 +14,7 @@ I tried to make each part clearly and detailedly for those junior developers. Wh
 
 Additionally, the Poker class is the launcher of this project.
 
+Hope you can enjoy it.
+
 
 
