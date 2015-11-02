@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -68,7 +67,7 @@ public final class SortedOccSet<E> {
      * relationship between key (input type) and value (ArrayList), wrapping the
      * operations of the map to offer the above features.
      */
-    private Map<E, ArrayList<E>> map;
+    private TreeMap<E, ArrayList<E>> map;
 
     /**
      * The constructor creates a new TreeMap object.
@@ -163,8 +162,9 @@ public final class SortedOccSet<E> {
      * 
      * @return Iterator<E>: the iterator of the Set.
      */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Iterator<E> iterator() {
-        return map.keySet().iterator();
+        return ((TreeMap) map.clone()).keySet().iterator();
     }
 
     /**

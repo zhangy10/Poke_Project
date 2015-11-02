@@ -254,6 +254,9 @@ public final class Player implements Comparable<Player> {
      */
     @Override
     public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
         Player another = (Player) o;
         return description.getCardType() == another.getDescription()
                 .getCardType();
