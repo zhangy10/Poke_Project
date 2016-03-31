@@ -2,26 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This Referee class represents a referee who can make a decision of which
+ * players are winners in Poker game. All players are managed by a Referee in
+ * this project. Also, this class is immutable, which can only return such an
+ * integer or String for output. The main features of this class are the below
+ * points:
+ * <p>
+ * 1) Making a fair decision for players by using the algorithm of selecting
+ * winners.
+ * <p>
+ * 2) Returning the relevant output messages for printing.
  * 
  * @author Yu Zhang
  * 
- *         LoginID: zhangy10
- * 
- *
  * @ClassName Referee
  * 
  *            Oct 4, 2015
- * 
- * @Description This Referee class represents a referee who can make a decision
- *              of which players are winners in Poker game. All players are
- *              managed by a Referee in this project. Also, this class is
- *              immutable, which can only return such an integer or String for
- *              output. The main features of this class are the below points:
- *              <p>
- *              1) Making a fair decision for players by using the algorithm of
- *              selecting winners.
- *              <p>
- *              2) Returning the relevant output messages for printing.
  * 
  * @see Player, SortedOccSet
  */

@@ -1,18 +1,14 @@
 /**
+ * This abstract Card class type represent one single poker card which contains
+ * two stuffs, Rank and Suit. Also, this class implements the interface of
+ * Comparable for sorting a group of cards. This class is defined as an
+ * immutable class.
  * 
  * @author Yu Zhang
  * 
- *         LoginID: zhangy10
- * 
- *
  * @ClassName Card
  * 
  *            Oct 4, 2015
- * 
- * @Description This abstract Card class type represent one single poker card
- *              which contains two stuffs, Rank and Suit. Also, this class
- *              implements the interface of Comparable for sorting a group of
- *              cards. This class is defined as an immutable class.
  */
 public final class Card implements Comparable<Card> {
     /* To represent the pattern of each card */

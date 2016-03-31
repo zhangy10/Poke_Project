@@ -5,59 +5,49 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 /**
+ * According to the specification, a few cases mentioned the situation that a
+ * number of types might be the same in Poker game.
+ * <p>
+ * For example, the challenge of identifying which description belongs to which
+ * card type (n of A Kind) is to find the number of the same rank in each hand
+ * of cards. In this case, the way of using hash idea to find the occurrence of
+ * the same things is the best solution offering a linear time-consuming
+ * complexity to build the relationship between the number of occurrence and
+ * different things.
+ * <p>
+ * For other cases, implementing or abstracting a single class to offer the
+ * above hash idea is a proper way to avoid code repetitions and to make the
+ * logical parts clearer. Therefore, this SortedOccSet class is designed for
+ * offering the below features:
+ * <p>
+ * 1) Sorting the given objects by ascending order.
+ * <p>
+ * 2) Returning the number of occurrence of the same objects.
+ * <p>
+ * 3) Finding the a list objects with the same types by implementing the
+ * Occurrence interface as input.
+ * <p>
+ * Note:
+ * <p>
+ * 1) The input objects must implement both of methods, compareTo() for sorting
+ * and equal() for checking whether two objects are the same.
+ * <p>
+ * 2) This collection will be involved in two logical parts, finding same ranks
+ * in a hand of cards in CardType class and picking the highest card type from a
+ * group of players in Referee class.
+ * <p>
+ * 3) The Occurrence interface requires to be implemented in some situations
+ * that will find the object references of the same given type by the number of
+ * occurrence. More details can be found in this interface.
  * 
  * @author Yu Zhang
  * 
- *         LoginID: zhangy10
- * 
- *
  * @ClassName SortedOccSet
  * 
  *            Oct 4, 2015
  * 
  * @param <E>
  *            The element type of this Set.
- * 
- * @Description According to the specification, a few cases mentioned the
- *              situation that a number of types might be the same in Poker
- *              game.
- *              <p>
- *              For example, the challenge of identifying which description
- *              belongs to which card type (n of A Kind) is to find the number
- *              of the same rank in each hand of cards. In this case, the way of
- *              using hash idea to find the occurrence of the same things is the
- *              best solution offering a linear time-consuming complexity to
- *              build the relationship between the number of occurrence and
- *              different things.
- *              <p>
- *              For other cases, implementing or abstracting a single class to
- *              offer the above hash idea is a proper way to avoid code
- *              repetitions and to make the logical parts clearer. Therefore,
- *              this SortedOccSet class is designed for offering the below
- *              features:
- *              <p>
- *              1) Sorting the given objects by ascending order.
- *              <p>
- *              2) Returning the number of occurrence of the same objects.
- *              <p>
- *              3) Finding the a list objects with the same types by
- *              implementing the Occurrence interface as input.
- *              <p>
- *              Note:
- *              <p>
- *              1) The input objects must implement both of methods, compareTo()
- *              for sorting and equal() for checking whether two objects are the
- *              same.
- *              <p>
- *              2) This collection will be involved in two logical parts,
- *              finding same ranks in a hand of cards in CardType class and
- *              picking the highest card type from a group of players in Referee
- *              class.
- *              <p>
- *              3) The Occurrence interface requires to be implemented in some
- *              situations that will find the object references of the same
- *              given type by the number of occurrence. More details can be
- *              found in this interface.
  * 
  * @see CardType, Referee, Occurrence
  */

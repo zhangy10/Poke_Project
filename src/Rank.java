@@ -1,34 +1,27 @@
 /**
+ * This Enum type represents the rank of each card in Poker game. It contains 13
+ * different types which are from 2 to Ace.
+ * <p>
+ * As the decision of who is the winner depends on the order of Rank in
+ * specification, the way of using Enum type to represent different types is
+ * useful for sorting a list of data by using Arrays.sort() or
+ * Collections.sort(), because these sort methods in Java require the input
+ * objects to implement a Comparable interface or Comparator interface. In this
+ * case, the Comparable interface has been automatically implemented by Enum
+ * type for user to compare each different type.
+ * <p>
+ * Note: The return of this compare method depends on the order of user's
+ * declarations, which means that the given order is followed by the sequence
+ * from left to right as an ascending order (default order in Java). However the
+ * below declarations are defined as a descending order by the below personal
+ * consideration. Therefore, another compareRank() method is designed for
+ * comparing the real value of each Rank type in this Project.
  * 
  * @author Yu Zhang
  * 
- *         LoginID: zhangy10
- * 
- *
  * @ClassName Rank
  * 
  *            Oct 4, 2015
- * 
- * @Description This Enum type represents the rank of each card in Poker game.
- *              It contains 13 different types which are from 2 to Ace.
- *              <p>
- *              As the decision of who is the winner depends on the order of
- *              Rank in specification, the way of using Enum type to represent
- *              different types is useful for sorting a list of data by using
- *              Arrays.sort() or Collections.sort(), because these sort methods
- *              in Java require the input objects to implement a Comparable
- *              interface or Comparator interface. In this case, the Comparable
- *              interface has been automatically implemented by Enum type for
- *              user to compare each different type.
- *              <p>
- *              Note: The return of this compare method depends on the order of
- *              user's declarations, which means that the given order is
- *              followed by the sequence from left to right as an ascending
- *              order (default order in Java). However the below declarations
- *              are defined as a descending order by the below personal
- *              consideration. Therefore, another compareRank() method is
- *              designed for comparing the real value of each Rank type in this
- *              Project.
  */
 public enum Rank {
 

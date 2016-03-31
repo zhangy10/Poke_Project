@@ -1,20 +1,16 @@
 /**
+ * This Description class represents an abstract data structure of each
+ * classification's description from specification. It contains three instance
+ * variables which are also related to the expected output of each type
+ * description.
+ * <p>
+ * This class is an immutable class.
  * 
  * @author Yu Zhang
  * 
- *         LoginID: zhangy10
- * 
- *
  * @ClassName Description
  * 
  *            Oct 4, 2015
- * 
- * @Description This Description class represents an abstract data structure of
- *              each classification's description from specification. It
- *              contains three instance variables which are also related to the
- *              expected output of each type description.
- *              <p>
- *              This class is an immutable class.
  */
 public final class Description {
     /**

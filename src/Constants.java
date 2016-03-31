@@ -2,24 +2,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * This Constants class is used for declaring some constant things, including
+ * string, integer and static block, to provide a quickly convenient way for
+ * accessing these constant resources in this Project.
+ * <p>
+ * Note: According to the name principles of Java, using upper letters names the
+ * final constant variables with the underlines to separate different words.
  * 
  * @author Yu Zhang
  * 
- *         LoginID: zhangy10
- * 
- *
  * @ClassName Constants
  * 
  *            Oct 4, 2015
- * 
- * @Description This Constants class is used for declaring some constant things,
- *              including string, integer and static block, to provide a quickly
- *              convenient way for accessing these constant resources in this
- *              Project.
- *              <p>
- *              Note: According to the name principles of Java, using upper
- *              letters names the final constant variables with the underlines
- *              to separate different words.
  */
 public class Constants {
     /**
@@ -38,10 +32,8 @@ public class Constants {
     public final static String PLAYER_DES = "Player %d: %s";
     public final static String WINS_DES = "Player %d wins.";
     public final static String DRAW_DES = "Players %s draw.";
-    public final static String INVALID_INPUT_NUMBER = 
-            "Error: wrong number of arguments; must be a multiple of 5";
-    public final static String INVALID_CARD_NAME = 
-            "Error: invalid card name '%s'";
+    public final static String INVALID_INPUT_NUMBER = "Error: wrong number of arguments; must be a multiple of 5";
+    public final static String INVALID_CARD_NAME = "Error: invalid card name '%s'";
 
     /**
      * Using map collection is a straightforward way to build the relationship

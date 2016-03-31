@@ -1,41 +1,35 @@
 /**
+ * This project will provide an efficient solution to deal with the questions of
+ * Poker game. According to the specification, this game offers players a number
+ * of rules for selecting the final winners. It contains 13 kinds of ranks from
+ * 2 to Ace as an ascending order, 4 kinds of suits and 9 kinds of
+ * classifications from StriaghtFlush to HighCard as a descending order. Also,
+ * the maximum card number of each player is 5. The decision for selecting
+ * winners will depend on the card classifications as well as the value of each
+ * card rank.
+ * <p>
+ * The challenges of this project will involve the below points:
+ * <p>
+ * 1) Identifying the description of each hand of cards.
+ * <p>
+ * 2) Selecting winners by using given conditions in specification.
+ * <p>
+ * This Poker class is the launch class of this project. Its features involve
+ * the below points:
+ * <p>
+ * 1) Validating the given input data.
+ * <p>
+ * 2) Outputting each player's description of cards. For this point, the Referee
+ * class is abstracted. It is involved to return the relevant description of
+ * each player and to select winners. More detail can be found in this class.
+ * <p>
+ * 3) Printing a winner list.
  * 
  * @author Yu Zhang
  * 
- *         LoginID: zhangy10
- * 
- *
  * @ClassName Poker
  * 
  *            Oct 4, 2015
- * 
- * @Description This project will provide an efficient solution to deal with the
- *              questions of Poker game. According to the specification, this
- *              game offers players a number of rules for selecting the final
- *              winners. It contains 13 kinds of ranks from 2 to Ace as an
- *              ascending order, 4 kinds of suits and 9 kinds of classifications
- *              from StriaghtFlush to HighCard as a descending order. Also, the
- *              maximum card number of each player is 5. The decision for
- *              selecting winners will depend on the card classifications as
- *              well as the value of each card rank.
- *              <p>
- *              The challenges of this project will involve the below points:
- *              <p>
- *              1) Identifying the description of each hand of cards.
- *              <p>
- *              2) Selecting winners by using given conditions in specification.
- *              <p>
- *              This Poker class is the launch class of this project. Its
- *              features involve the below points:
- *              <p>
- *              1) Validating the given input data.
- *              <p>
- *              2) Outputting each player's description of cards. For this
- *              point, the Referee class is abstracted. It is involved to return
- *              the relevant description of each player and to select winners.
- *              More detail can be found in this class.
- *              <p>
- *              3) Printing a winner list.
  * 
  * @see Referee
  */

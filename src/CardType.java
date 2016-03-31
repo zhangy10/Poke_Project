@@ -1,39 +1,33 @@
 import java.util.List;
 
 /**
+ * This Enum CardType represents 9 different classifications of Poker game. It
+ * also offers the below features for identifying the given cards' description:
+ * <p>
+ * 1) Identifying whether the cards belong to a Flush type.
+ * <p>
+ * 2) Identifying whether the cards belong to a Striaght type.
+ * <p>
+ * 3) Identifying whether the same ranks exist in the given cards to return a n
+ * of AKind type.
+ * <p>
+ * Note:
+ * <p>
+ * 1) The idea of identifying a n of AKind type is to use the given occurrence
+ * of each classification from specification to match whether it can be found in
+ * a SortedOccSet. In this case, this class need to implement the Occurrence
+ * interface to provide the occurrence of each AKind type.
+ * <p>
+ * 2) The order of the classifications is declared as a descending order, while
+ * the default sorting order in Java is ascending. Therefore, the first place of
+ * sorted CardType collection is the max value. This declaration is the same
+ * with Rank's.
  * 
  * @author Yu Zhang
  * 
- *         LoginID: zhangy10
- * 
- *
  * @ClassName CardType
  * 
  *            Oct 4, 2015
- * 
- * @Description This Enum CardType represents 9 different classifications of
- *              Poker game. It also offers the below features for identifying
- *              the given cards' description:
- *              <p>
- *              1) Identifying whether the cards belong to a Flush type.
- *              <p>
- *              2) Identifying whether the cards belong to a Striaght type.
- *              <p>
- *              3) Identifying whether the same ranks exist in the given cards
- *              to return a n of AKind type.
- *              <p>
- *              Note:
- *              <p>
- *              1) The idea of identifying a n of AKind type is to use the given
- *              occurrence of each classification from specification to match
- *              whether it can be found in a SortedOccSet. In this case, this
- *              class need to implement the Occurrence interface to provide the
- *              occurrence of each AKind type.
- *              <p>
- *              2) The order of the classifications is declared as a descending
- *              order, while the default sorting order in Java is ascending.
- *              Therefore, the first place of sorted CardType collection is the
- *              max value. This declaration is the same with Rank's.
  * 
  * @see Occurrence, SortedOccSet, Rank
  */

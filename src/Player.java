@@ -4,26 +4,21 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * This Player class is abstracted to represent each real player in Poker game.
+ * It holds a number of variables, and will be determined by a Referee to
+ * identify which players are winners.
+ * <p>
+ * Note: Considering the algorithm of selecting winners will put each Player
+ * into a SortedOccSet to group by each card type and to get a highest card type
+ * player list, the Comparable interface is required to be implemented related
+ * to the description of SortedOccSet. Also, the equal() method need to be
+ * overridden. This class is immutable.
  * 
  * @author Yu Zhang
  * 
- *         LoginID: zhangy10
- * 
- *
  * @ClassName Player
  * 
  *            Oct 4, 2015
- * 
- * @Description This Player class is abstracted to represent each real player in
- *              Poker game. It holds a number of variables, and will be
- *              determined by a Referee to identify which players are winners.
- *              <p>
- *              Note: Considering the algorithm of selecting winners will put
- *              each Player into a SortedOccSet to group by each card type and
- *              to get a highest card type player list, the Comparable interface
- *              is required to be implemented related to the description of
- *              SortedOccSet. Also, the equal() method need to be overridden.
- *              This class is immutable.
  * 
  * @see Card, Description, CardType, SortedOccSet
  */
